@@ -63,15 +63,11 @@ void charRead(string filename)
 				textfile.close();
 				break;
 			}
-			cout << "Read this character: \n";
-			cout << symbol << "\n";
 			if (charfile.is_open()) // If the txt file we are writing to is already open, write the character we just read.
 			{
 				charfile << symbol; // Officially writes the value of the character just read into the new .txt file
-				cout << "Wrote the character to charRead.txt \n";
 			}
 			else cout << "Unable to write character to new text file (charRead.txt). \n";
-			cout << "Finished writing all characters to charRead.txt \n";
 		}
 		textfile.close();
 		charfile.close();
@@ -100,12 +96,9 @@ void lineRead(string filename)
 					textfile.close();
 					break;
 				}
-				cout << "Reading this line: \n";
-				cout << line << "\n";
 				if (linefile.is_open()) // Guarantees that the file is actually opened to execute the writing.
 				{
 					linefile << line << "\n"; // Officially writes the line that was just read into the new .txt file
-					cout << "Wrote the line to LineRead.txt \n";
 				}
 				else cout << "Unable to write line to new text file (LineRead.txt). \n";
 			}
