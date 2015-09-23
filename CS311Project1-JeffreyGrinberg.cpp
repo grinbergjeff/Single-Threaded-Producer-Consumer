@@ -46,6 +46,7 @@ int main()
 void charRead(string filename)
 {
 	char symbol = 'a'; // Every character that gets read will get temporarily store into this variable.
+	start_timing(); // When charRead starts to execute I want to start timining it.
 	ifstream textfile(filename); //Opens text file to read from
 	ofstream charfile("charRead.txt"); // Opens text file to write to
 	//int finder = textfile.peek(); // Looks for value of character [Going to look for EOF and peek() supports EOF]
@@ -73,11 +74,15 @@ void charRead(string filename)
 		textfile.close();
 		charfile.close();
 	}
+	stop_timing();
+	printf("\n charRead CPU time: %f", get_CPU_time_diff());
+	printf("\n charRead Wall Clock: %f", get_wall_clock_diff());
 }
 
 void lineRead(string filename)
 {
 	string line; // 'line' temporarily stores the value of the line that was read
+	start_timing(); // When lineRead starts to execute I want to start timining it.
 	ifstream textfile(filename); //Opens text file to read from
 	ofstream linefile("LineRead.txt"); // Opens text file to write to
 	//Insert some verification parameters
@@ -102,5 +107,7 @@ void lineRead(string filename)
 		}
 	}
 	else cout << "Unable to open original text file. \n";
+	stop_timing();
+	printf("\n lineRead CPU time: %f", get_CPU_time_diff());
+	printf("\n lineRead Wall Clock: %f \n", get_wall_clock_diff());
 }
-
