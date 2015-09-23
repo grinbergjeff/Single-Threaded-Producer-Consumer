@@ -43,13 +43,14 @@ int main()
 	return 0;
 }
 
+//Function Generation
 void charRead(string filename)
 {
 	char symbol = 'a'; // Every character that gets read will get temporarily store into this variable.
 	start_timing(); // When charRead starts to execute I want to start timining it.
 	ifstream textfile(filename); //Opens text file to read from
 	ofstream charfile("charRead.txt"); // Opens text file to write to
-	//int finder = textfile.peek(); // Looks for value of character [Going to look for EOF and peek() supports EOF]
+
 	//Insert some verification parameters
 	if (textfile.is_open()) //checks if text file is open
 	{
@@ -58,14 +59,15 @@ void charRead(string filename)
 			symbol = textfile.get(); // Stores the character that is read to variable sym
 			if (textfile.eof()) //If get() reaches the EOF, close the file and stop doing everything.
 			{
+				//I will not write the End of File character (EOF) in the file, because.get() creates a random EOF character and it will make the new .txt file ultimately different from the original.
 				textfile.close();
 				break;
 			}
 			cout << "Read this character: \n";
 			cout << symbol << "\n";
-			if (charfile.is_open())
+			if (charfile.is_open()) // If the txt file we are writing to is already open, write the character we just read.
 			{
-				charfile << symbol;
+				charfile << symbol; // Officially writes the value of the character just read into the new .txt file
 				cout << "Wrote the character to charRead.txt \n";
 			}
 			else cout << "Unable to write character to new text file (charRead.txt). \n";
@@ -74,7 +76,7 @@ void charRead(string filename)
 		textfile.close();
 		charfile.close();
 	}
-	stop_timing();
+	stop_timing(); // Once chaRead finishes, I want to stop timing and output the time.
 	printf("\n charRead CPU time: %f", get_CPU_time_diff());
 	printf("\n charRead Wall Clock: %f \n", get_wall_clock_diff());
 }
@@ -92,13 +94,18 @@ void lineRead(string filename)
 		{
 			while (getline(textfile, line)) // Output each line that is read.
 			{
+				if (textfile.eof()) //If getline() reaches the EOF, close the file and stop doing everything.
+				{
+					linefile << line; // Write the last line into the new .txt file and close/exit.
+					textfile.close();
+					break;
+				}
 				cout << "Reading this line: \n";
 				cout << line << "\n";
-				if (linefile.is_open())
+				if (linefile.is_open()) // Guarantees that the file is actually opened to execute the writing.
 				{
-					linefile << line << "\n";
+					linefile << line << "\n"; // Officially writes the line that was just read into the new .txt file
 					cout << "Wrote the line to LineRead.txt \n";
-					//linefile.close();
 				}
 				else cout << "Unable to write line to new text file (LineRead.txt). \n";
 			}
