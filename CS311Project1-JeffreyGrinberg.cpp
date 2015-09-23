@@ -76,7 +76,7 @@ void charRead(string filename)
 	}
 	stop_timing();
 	printf("\n charRead CPU time: %f", get_CPU_time_diff());
-	printf("\n charRead Wall Clock: %f", get_wall_clock_diff());
+	printf("\n charRead Wall Clock: %f \n", get_wall_clock_diff());
 }
 
 void lineRead(string filename)
@@ -111,3 +111,4 @@ void lineRead(string filename)
 	printf("\n lineRead CPU time: %f", get_CPU_time_diff());
 	printf("\n lineRead Wall Clock: %f \n", get_wall_clock_diff());
 }
+
